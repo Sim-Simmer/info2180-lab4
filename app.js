@@ -1,11 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
-    let searchButton = document.getElementById('searchButton');
-    searchButton.addEventListener('click', function() {
-        console.log("Button clicked");
-        fetch("superheroes.php")
+    let searchBtn = document.getElementById('searchButton');
+    let searchInput = document.getElementById('searchInput');
+    let result = document.getElementById('result');
+    searchBtn.addEventListener('click', function() {
+        let query = searchInput.value.trim();
+        let url = "superheroes.php?query=" + encodeURIComponent(query);
+        fetch(url)
             .then(response => response.text())
             .then (data => {
-                alert(data);
+                result.innerHTML = data;
             });
     });
 });
